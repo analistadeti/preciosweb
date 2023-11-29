@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda - Inicio</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Estilo para ajustar el tamaño de las imágenes en el carrusel */
+        #promocionesCarousel img {
+            object-fit: cover;
+            height: 400px;
+            border-radius: 15px;
+
+        }
+    </style>
+</head>
+<body style="background-color: #003166;">
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Carrusel de Imágenes de Promociones -->
+            <div class="col-md-6">
+                <div id="promocionesCarousel" class="carousel slide mb-4" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for image in images %}
+                        <li data-target="#promocionesCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for image in images %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.alt_text }}">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#promocionesCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#promocionesCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Fin del Carrusel de Imágenes -->
+
+            <div class="col-md-6">
+                <form method="post" action="{% url 'buscar_producto' %}" class="mb-3" id="searchForm">
+                    {% csrf_token %}
+                    <label for="id_producto" style="color:white">Código de Barras:</label>
+                    <input type="text" id="id_producto" name="id_producto" class="form-control">
+                </form>
+                {% if descripcion %}
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ descripcion }}</h4>
+                        <p class="card-text">Precio: ${{ precio_formateado }}</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enfocar el campo de búsqueda en intervalos regulares
+        setInterval(function() {
+            document.getElementById("id_producto").focus();
+        }, 1000); // Cambiar el intervalo según sea necesario
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

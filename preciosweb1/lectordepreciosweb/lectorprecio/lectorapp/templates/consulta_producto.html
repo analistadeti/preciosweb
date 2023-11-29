@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Productos</title>
+    <!-- Agrega los enlaces a los archivos CSS de Bootstrap aquí -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card mt-2">
+            <div class="card-header">
+                Total Productos buscados: python {{ total_contador }}
+            </div>
+
+        </div>
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>Código de Barras</th>
+                    <th>Contador</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.codigo_de_barra }}</td>
+                    <td>{{ producto.contador }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!-- Agrega los enlaces a los archivos JS de Bootstrap aquí -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

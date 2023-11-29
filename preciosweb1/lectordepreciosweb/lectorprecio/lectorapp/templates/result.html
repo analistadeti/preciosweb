@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Búsqueda</title>
+</head>
+<body>
+    <h1>Resultado de Búsqueda</h1>
+    {% if descripcion %}
+        <p>Descripción: {{ descripcion }}</p>
+        <p>Precio: ${{ precio_formateado }}</p>
+    {% else %}
+        <p>{{ mensaje }}</p>
+    {% endif %}
+    <a href="{% url 'buscar_producto' %}">Realizar otra búsqueda</a>
+</body>
+</html>
